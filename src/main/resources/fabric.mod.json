@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "viewmodel",
+  "version": "${version}",
+  "name": "Viewmodel",
+  "description": "A mod to change the scaling/position of first person items",
+  "authors": [
+    "Ethius"
+  ],
+  "contact": {
+    "website": "none"
+  },
+  "license": "MIT",
+  "icon": "assets/viewmodel/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "me.ethius.viewmodel.Viewmodel"
+    ]
+  },
+  "mixins": [
+    "viewmodel.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}

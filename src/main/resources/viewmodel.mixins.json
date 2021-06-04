@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.ethius.viewmodel.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinHeldItemRenderer",
+    "MixinKeyboard"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
