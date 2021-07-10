@@ -82,23 +82,18 @@ public class SaveConfig {
                 }
             }
         } else {
-            if (!Files.exists(Paths.get(folderName + name + ".json"))) {
-                Files.createFile(Paths.get(folderName + name + ".json"));
-            }
-            else {
+            if (Files.exists(Paths.get(folderName + name + ".json"))) {
                 File file = new File(folderName + name + ".json");
 
                 file.delete();
-
-                Files.createFile(Paths.get(folderName +name + ".json"));
             }
+            Files.createFile(Paths.get(folderName + name + ".json"));
         }
 
     }
 
-    public void timedSave(){
-        if (saveTimer.passed(5000))
-        {
+    public void timedSave() {
+        if (saveTimer.passed(5000)) {
             saveAllSettings();
             saveTimer.reset();
         }

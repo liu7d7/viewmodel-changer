@@ -1,6 +1,9 @@
 package me.ethius.viewmodel.gui;
 
 import me.ethius.viewmodel.Viewmodel;
+import me.ethius.viewmodel.gui.ViewmodelScreen.Slider;
+import me.ethius.viewmodel.gui.ViewmodelScreen.Switch;
+import me.ethius.viewmodel.gui.ViewmodelScreen.ViewmodelGuiObj;
 import me.ethius.viewmodel.settings.BooleanSetting;
 import me.ethius.viewmodel.settings.FloatSetting;
 import me.ethius.viewmodel.settings.Setting;
