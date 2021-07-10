@@ -27,7 +27,8 @@ public class Viewmodel implements ModInitializer {
     public static final FloatSetting ROTATION_X = new FloatSetting("Rotation X", 0, -180, 180);
     public static final FloatSetting ROTATION_Y = new FloatSetting("Rotation Y", 0, -180, 180);
     public static final FloatSetting ROTATION_Z = new FloatSetting("Rotation Z", 0, -180, 180);
-    public static final List<Setting> SETTINGS = Arrays.asList(SCALE, SCALE_X, SCALE_Y, SCALE_Z, POS, POS_X, POS_Y, POS_Z, ROTATION, ROTATION_X, ROTATION_Y, ROTATION_Z);
+    public static final BooleanSetting CHANGE_SWING = new BooleanSetting("Change Swing", false);
+    public static final List<Setting<?>> SETTINGS = Arrays.asList(SCALE, SCALE_X, SCALE_Y, SCALE_Z, POS, POS_X, POS_Y, POS_Z, ROTATION, ROTATION_X, ROTATION_Y, ROTATION_Z, CHANGE_SWING);
 
     protected static SaveConfig sconfig;
     protected static LoadConfig lconfig;
