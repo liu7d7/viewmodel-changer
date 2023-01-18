@@ -44,7 +44,7 @@ jobs:
       with:
         distribution: 'liberica' # See 'Supported distributions' for available options
         java-version: '18'
-        cache: 'maven'
+        cache: 'gradle'
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
