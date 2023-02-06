@@ -26,14 +26,16 @@ public class LoadConfig {
         loadAllSettings();
     }
 
-    public void loadAllSettings() {
+    public void loadAllSettings() throws IOException {
+        InputStreamReader inputStreamReader = null;
         try {
             if (!Files.exists(Paths.get(folderName + "Viewmodel.json"))) {
                 return;
             }
 
             InputStream inputStream = Files.newInputStream(Paths.get(folderName + "Viewmodel.json"));
-            JsonObject viewmodelObj = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+            inputStreamReader = new InputStreamReader(inputStream);
+            JsonObject viewmodelObj = new JsonParser().parse(inputStreamReader).getAsJsonObject();
 
             for (Setting value : Viewmodel.SETTINGS) {
                 JsonElement valueElement = viewmodelObj.get(value.getName());
@@ -47,6 +49,13 @@ public class LoadConfig {
             inputStream.close();
         } catch (IOException ignored) {
 
+        } finally {
+            assert inputStreamReader != null;
+            try {
+                inputStreamReader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

@@ -171,6 +171,8 @@ public abstract class MixinHeldItemRenderer {
                                 matrices.scale(1.0F, 1.0F, 1.0F + v * 0.2F);
                                 matrices.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion((float) o * 45.0F));
                             }
+                            default -> {
+                            }
                         }
                     } else if (player.isUsingRiptide()) {
                         this.applyEquipOffset(matrices, arm, equipProgress);
