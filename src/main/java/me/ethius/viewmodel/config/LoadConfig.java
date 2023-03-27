@@ -23,7 +23,11 @@ public class LoadConfig {
     public static String folderName = SaveConfig.folderName;
 
     public LoadConfig() {
-        loadAllSettings();
+        try {
+            loadAllSettings();
+        } catch (IOException e) {
+
+        }
     }
 
     public void loadAllSettings() throws IOException {
@@ -50,12 +54,8 @@ public class LoadConfig {
         } catch (IOException ignored) {
 
         } finally {
-            assert inputStreamReader != null;
-            try {
+            if (inputStreamReader != null)
                 inputStreamReader.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
 
