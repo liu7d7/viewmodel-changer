@@ -2,7 +2,7 @@
   "extends": [
     "config:base"
   ],
-  "includeForks": true,
+  "forkProcessing": "enabled",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
