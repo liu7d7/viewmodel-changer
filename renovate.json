@@ -3,7 +3,7 @@
     "config:base"
   ],
   "forkProcessing": "enabled",
-  "ignoreDeps": ["com.mojang:minecraft"]
+  "ignoreDeps": ["com.mojang:minecraft"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
