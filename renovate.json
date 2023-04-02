@@ -2,6 +2,7 @@
   "extends": [
     "config:base"
   ],
+  "includeForks": true,
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
