@@ -39,7 +39,7 @@ public class LoadConfig {
 
             InputStream inputStream = Files.newInputStream(Paths.get(folderName + "Viewmodel.json"));
             inputStreamReader = new InputStreamReader(inputStream);
-            JsonObject viewmodelObj = new JsonParser().parse(inputStreamReader).getAsJsonObject();
+            JsonObject viewmodelObj = JsonParser.parseReader(inputStreamReader).getAsJsonObject();
 
             for (Setting value : Viewmodel.SETTINGS) {
                 JsonElement valueElement = viewmodelObj.get(value.getName());

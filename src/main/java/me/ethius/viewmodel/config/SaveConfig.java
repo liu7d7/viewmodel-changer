@@ -57,7 +57,7 @@ public class SaveConfig {
                 }
             }
 
-            String jsonString = gson.toJson(new JsonParser().parse(viewmodelObj.toString()));
+            String jsonString = gson.toJson(JsonParser.parseString(viewmodelObj.toString()));
             fileOutputStreamWriter.write(jsonString);
             fileOutputStreamWriter.close();
         } catch (FileNotFoundException e) {
