@@ -20,17 +20,17 @@ import java.nio.file.Paths;
 @SuppressWarnings("unchecked")
 public class LoadConfig {
 
-    public static String folderName = SaveConfig.folderName;
+    private static String folderName = SaveConfig.folderName;
 
     public LoadConfig() {
         try {
             loadAllSettings();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
 
         }
     }
 
-    public void loadAllSettings() throws IOException {
+    private static void loadAllSettings() throws IOException {
         InputStreamReader inputStreamReader = null;
         try {
             if (!Files.exists(Paths.get(folderName + "Viewmodel.json"))) {

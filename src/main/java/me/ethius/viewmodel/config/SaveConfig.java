@@ -7,10 +7,7 @@ import me.ethius.viewmodel.settings.FloatSetting;
 import me.ethius.viewmodel.settings.Setting;
 import me.ethius.viewmodel.util.Stopwatch;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,7 +18,7 @@ import java.nio.file.Paths;
 public class SaveConfig {
 
     private Gson gson;
-    public static Stopwatch saveTimer;
+    private static Stopwatch saveTimer;
 
     public SaveConfig() {
         try {
@@ -38,13 +35,13 @@ public class SaveConfig {
 
     public static String folderName = "Viewmodel/";
 
-    public void saveConfig() throws IOException {
+    private static void saveConfig() throws IOException {
         if (!Files.exists(Paths.get(folderName))) {
             Files.createDirectories(Paths.get(folderName));
         }
     }
 
-    public void saveAllSettings() {
+    public static void saveAllSettings() {
         try {
             makeFile(null, "Viewmodel");
 
@@ -63,23 +60,24 @@ public class SaveConfig {
             String jsonString = gson.toJson(new JsonParser().parse(viewmodelObj.toString()));
             fileOutputStreamWriter.write(jsonString);
             fileOutputStreamWriter.close();
-        }
-        catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void makeFile(String location, String name) throws IOException {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private static void makeFile(String location, String name) throws IOException {
         if (location != null) {
-            if (!Files.exists(Paths.get(folderName + location + name + ".json"))) {
-                Files.createFile(Paths.get(folderName + location + name + ".json"));
-            }
-            else {
+            if (Files.exists(Paths.get(folderName + location + name + ".json"))) {
                 File file = new File(folderName + location + name + ".json");
 
                 if (file.delete()) {
                     Files.createFile(Paths.get(folderName + location + name + ".json"));
                 }
+            } else {
+                Files.createFile(Paths.get(folderName + location + name + ".json"));
             }
         } else {
             if (Files.exists(Paths.get(folderName + name + ".json"))) {
@@ -92,7 +90,7 @@ public class SaveConfig {
 
     }
 
-    public void timedSave() {
+    private static void timedSave() {
         if (saveTimer.passed(5000)) {
             saveAllSettings();
             saveTimer.reset();

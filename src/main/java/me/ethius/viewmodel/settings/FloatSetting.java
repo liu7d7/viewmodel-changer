@@ -9,7 +9,8 @@ public class FloatSetting extends Setting<Float> {
         this.min = min;
         this.max = max;
     }
-
+    
+    @Override
     public String getName() {
         return name;
     }
@@ -17,7 +18,8 @@ public class FloatSetting extends Setting<Float> {
     public void setValue(float value) {
         this.value = value;
     }
-
+    
+    @Override
     public Float getValue() {
         return value;
     }

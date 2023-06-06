@@ -10,10 +10,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Keyboard.class)
-public class MixinKeyboard {
+class MixinKeyboard {
 
     @Inject(at = @At("HEAD"), method = "onKey(JIIII)V", cancellable = true)
-    private void onOnKey(long windowHandle, int keyCode, int scanCode, int action, int modifiers, CallbackInfo ci) {
+    private static void onOnKey(long windowHandle, int keyCode, int scanCode, int action, int modifiers, CallbackInfo ci) {
         if (MinecraftClient.getInstance().world != null && action == GLFW.GLFW_PRESS && keyCode == GLFW.GLFW_KEY_BACKSLASH) {
             MinecraftClient.getInstance().setScreen(new ViewmodelScreen());
         }

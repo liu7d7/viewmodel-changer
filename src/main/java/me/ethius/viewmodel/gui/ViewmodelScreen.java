@@ -1,9 +1,6 @@
 package me.ethius.viewmodel.gui;
 
 import me.ethius.viewmodel.Viewmodel;
-import me.ethius.viewmodel.gui.ViewmodelScreen.Slider;
-import me.ethius.viewmodel.gui.ViewmodelScreen.Switch;
-import me.ethius.viewmodel.gui.ViewmodelScreen.ViewmodelGuiObj;
 import me.ethius.viewmodel.settings.BooleanSetting;
 import me.ethius.viewmodel.settings.FloatSetting;
 import me.ethius.viewmodel.settings.Setting;
@@ -20,21 +17,22 @@ import java.util.List;
 
 public class ViewmodelScreen extends Screen {
 
-    final MinecraftClient mc = MinecraftClient.getInstance();
-    final List<ViewmodelGuiObj> objs = new ArrayList<>();
+    private final MinecraftClient mc = MinecraftClient.getInstance();
+    private final List<ViewmodelGuiObj> objs = new ArrayList<>();
 
     public ViewmodelScreen() {
         super(Text.of("Viewmodel"));
     }
-
+    
+    @Override
     public void init() {
         int settingCount = 0;
         for (Setting setting : Viewmodel.SETTINGS) {
             settingCount++;
             if (setting instanceof BooleanSetting) {
-                objs.add(new Switch((BooleanSetting) setting, 80, 50 + settingCount * 16, 12));
+                objs.add(new Switch((BooleanSetting) setting, 80, 50 + (settingCount << 4), 12));
             } else if (setting instanceof FloatSetting) {
-                objs.add(new Slider((FloatSetting) setting, 80, 50 + settingCount * 16, 80, 12));
+                objs.add(new Slider((FloatSetting) setting, 80, 50 + (settingCount << 4), 80, 12));
             }
         }
     }
@@ -45,7 +43,7 @@ public class ViewmodelScreen extends Screen {
         private final int x, y, width, height;
         private final float min, max;
 
-        public Slider(FloatSetting setting, int x, int y, int width, int height) {
+        Slider(FloatSetting setting, int x, int y, int width, int height) {
             this.setting = setting;
             this.x = x;
             this.y = y;
@@ -86,7 +84,7 @@ public class ViewmodelScreen extends Screen {
         private final int y;
         private final int height;
 
-        public Switch(BooleanSetting setting, int x, int y, int height) {
+        Switch(BooleanSetting setting, int x, int y, int height) {
             this.setting = setting;
             this.x = x;
             this.y = y;
@@ -106,18 +104,18 @@ public class ViewmodelScreen extends Screen {
         @Override
         public void render(MatrixStack matrices, int mouseX, int mouseY) {
             mc.textRenderer.drawWithShadow(matrices, setting.getName(), x - mc.textRenderer.getWidth(setting.getName()) - 1, y + height / 2f - mc.textRenderer.fontHeight / 2f, -1);
-            fill(matrices, x, y, x + height * 2, y + height, -0x78EFEFF0);
+            fill(matrices, x, y, x + (height << 1), y + height, -0x78EFEFF0);
             if (setting.getValue()) {
                 fill(matrices, x + 1, y + 1, x + height - 1, y + height - 1, -1);
             } else {
-                fill(matrices, x + height + 1, y + 1, x + height * 2 - 1, y + height - 1, -1);
+                fill(matrices, x + height + 1, y + 1, x + (height << 1) - 1, y + height - 1, -1);
             }
-            mc.textRenderer.drawWithShadow(matrices, setting.getValue().toString(), x + height * 2 + 1, y + height/2f - mc.textRenderer.fontHeight/2f, -1);
+            mc.textRenderer.drawWithShadow(matrices, setting.getValue().toString(), x + (height << 1) + 1, y + height/2f - mc.textRenderer.fontHeight/2f, -1);
         }
 
         @Override
         public boolean isWithin(double mouseX, double mouseY) {
-            return mouseX > x && mouseY > y && mouseX < x + height * 2 && mouseY < y + height;
+            return mouseX > x && mouseY > y && mouseX < x + (height << 1) && mouseY < y + height;
         }
     }
 
@@ -161,7 +159,7 @@ public class ViewmodelScreen extends Screen {
         return super.mouseScrolled(mouseX, mouseY, multiplier);
     }
 
-    public float round(float value, int places) {
+    private static float round(float value, int places) {
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.floatValue();

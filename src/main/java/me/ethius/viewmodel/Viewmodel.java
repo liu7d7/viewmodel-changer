@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Viewmodel implements ModInitializer {
 
-    public final Logger LOGGER = LogManager.getLogger();
+    private final Logger LOGGER = LogManager.getLogger();
     public static final BooleanSetting SCALE = new BooleanSetting("Scale", false);
     public static final FloatSetting SCALE_X = new FloatSetting("Scale X", 1, 0, 3);
     public static final FloatSetting SCALE_Y = new FloatSetting("Scale Y", 1, 0, 3);
@@ -30,8 +30,8 @@ public class Viewmodel implements ModInitializer {
     public static final BooleanSetting CHANGE_SWING = new BooleanSetting("Change Swing", false);
     public static final List<Setting<?>> SETTINGS = Arrays.asList(SCALE, SCALE_X, SCALE_Y, SCALE_Z, POS, POS_X, POS_Y, POS_Z, ROTATION, ROTATION_X, ROTATION_Y, ROTATION_Z, CHANGE_SWING);
 
-    protected static SaveConfig sconfig;
-    protected static LoadConfig lconfig;
+    private static SaveConfig sconfig;
+    private static LoadConfig lconfig;
 
     @Override
     public void onInitialize() {

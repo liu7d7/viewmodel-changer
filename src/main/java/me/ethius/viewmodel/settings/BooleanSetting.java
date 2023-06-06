@@ -5,7 +5,8 @@ public class BooleanSetting extends Setting<Boolean> {
     public BooleanSetting(String name, boolean defaultValue) {
         super(name, defaultValue);
     }
-
+    
+    @Override
     public String getName() {
         return name;
     }
@@ -14,6 +15,7 @@ public class BooleanSetting extends Setting<Boolean> {
         this.value = value;
     }
 
+    @Override
     public Boolean getValue() {
         return value;
     }

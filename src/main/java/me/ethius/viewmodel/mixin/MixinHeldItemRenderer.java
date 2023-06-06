@@ -86,6 +86,7 @@ public abstract class MixinHeldItemRenderer {
                         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-11.935F));
                         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)i * 65.3F));
                         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)i * -9.785F));
+                        assert this.client.player != null;
                         v = (float)item.getMaxUseTime() - ((float)this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
                         w = v / (float)CrossbowItem.getPullTime(item);
                         if (w > 1.0F) {
@@ -134,6 +135,7 @@ public abstract class MixinHeldItemRenderer {
                                 matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-13.935F));
                                 matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) o * 35.3F));
                                 matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) o * -9.785F));
+                                assert this.client.player != null;
                                 u = (float) item.getMaxUseTime() - ((float) this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
                                 v = u / 20.0F;
                                 v = (v * v + v * 2.0F) / 3.0F;
@@ -156,6 +158,7 @@ public abstract class MixinHeldItemRenderer {
                                 matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-55.0F));
                                 matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) o * 35.3F));
                                 matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) o * -9.785F));
+                                assert this.client.player != null;
                                 u = (float) item.getMaxUseTime() - ((float) this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
                                 v = u / 10.0F;
                                 if (v > 1.0F) {

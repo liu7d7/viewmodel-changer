@@ -2,10 +2,10 @@ package me.ethius.viewmodel.settings;
 
 public class Setting<T> {
 
-    protected T value;
-    protected String name;
+    T value;
+    String name;
 
-    public Setting(String name, T defaultValue) {
+    Setting(String name, T defaultValue) {
         this.name = name;
         this.value = defaultValue;
     }
