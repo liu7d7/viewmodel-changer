@@ -26,7 +26,7 @@ jobs:
           distribution: 'liberica'
           cache: 'gradle'
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
+        uses: gradle/wrapper-validation-action@064a97fb0b4cef86a65f09898c572382f3af10e0
       - name: Publish package
         uses: gradle/gradle-build-action@bde650d6f1426615a60165575bc9cdad3e54d975
         with:
