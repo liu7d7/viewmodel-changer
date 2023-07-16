@@ -20,7 +20,7 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@064a97fb0b4cef86a65f09898c572382f3af10e0
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@3c11eee5f9f46ca19a2706acfa4271757df95a6d
+        uses: gradle/gradle-build-action@a0fdbb009a74ec1b2c24a464d8fa3d86dacedfba
         with:
           arguments: build
       - uses: actions/upload-artifact@v3
