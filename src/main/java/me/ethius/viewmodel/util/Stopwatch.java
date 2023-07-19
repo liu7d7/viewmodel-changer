@@ -1,6 +1,6 @@
 package me.ethius.viewmodel.util;
 
-public final class Stopwatch {
+public class Stopwatch {
 
     private long time;
 

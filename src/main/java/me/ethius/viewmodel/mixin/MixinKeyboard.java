@@ -14,7 +14,7 @@ class MixinKeyboard {
 
     @Inject(at = @At("HEAD"), method = "onKey(JIIII)V", cancellable = true)
     private static void onOnKey(long windowHandle, int keyCode, int scanCode, int action, int modifiers, CallbackInfo ci) {
-        if (MinecraftClient.getInstance().world != null && action == GLFW.GLFW_PRESS && keyCode == GLFW.GLFW_KEY_BACKSLASH) {
+        if (null != MinecraftClient.getInstance().world && GLFW.GLFW_PRESS == action && GLFW.GLFW_KEY_BACKSLASH == keyCode) {
             MinecraftClient.getInstance().setScreen(new ViewmodelScreen());
         }
     }

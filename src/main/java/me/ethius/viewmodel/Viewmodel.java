@@ -38,7 +38,7 @@ public class Viewmodel implements ModInitializer {
         LOGGER.info("Loading Viewmodel!");
         lconfig = new LoadConfig();
         sconfig = new SaveConfig();
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> sconfig.saveAllSettings()));
+        Runtime.getRuntime().addShutdownHook(new Thread(SaveConfig::saveAllSettings));
     }
 
 }

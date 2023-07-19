@@ -4,13 +4,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.ethius.viewmodel.Viewmodel;
-import me.ethius.viewmodel.settings.BooleanSetting;
-import me.ethius.viewmodel.settings.FloatSetting;
 import me.ethius.viewmodel.settings.Setting;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -38,23 +37,20 @@ public class LoadConfig {
             }
 
             InputStream inputStream = Files.newInputStream(Paths.get(folderName + "Viewmodel.json"));
-            inputStreamReader = new InputStreamReader(inputStream);
+            inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             JsonObject viewmodelObj = JsonParser.parseReader(inputStreamReader).getAsJsonObject();
 
             for (Setting value : Viewmodel.SETTINGS) {
                 JsonElement valueElement = viewmodelObj.get(value.getName());
-                if (valueElement == null) continue;
-                if (value instanceof BooleanSetting) {
-                    value.setValue(valueElement.getAsBoolean());
-                } else if (value instanceof FloatSetting) {
-                    value.setValue(valueElement.getAsFloat());
-                }
+                if (null == valueElement) continue;
+                value.setValue(valueElement); // Polymorphism handles the specific type internally
             }
+
             inputStream.close();
         } catch (IOException ignored) {
 
         } finally {
-            if (inputStreamReader != null)
+            if (null != inputStreamReader)
                 inputStreamReader.close();
         }
     }

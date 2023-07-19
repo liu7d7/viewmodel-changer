@@ -5,8 +5,8 @@ import me.ethius.viewmodel.settings.BooleanSetting;
 import me.ethius.viewmodel.settings.FloatSetting;
 import me.ethius.viewmodel.settings.Setting;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 
@@ -49,8 +49,8 @@ public class ViewmodelScreen extends Screen {
             this.y = y;
             this.width = width;
             this.height = height;
-            min = setting.min;
-            max = setting.max;
+            min = setting.getMin();
+            max = setting.getMax();
         }
 
         @Override
@@ -64,10 +64,10 @@ public class ViewmodelScreen extends Screen {
         }
 
         @Override
-        public void render(MatrixStack matrices, int mouseX, int mouseY) {
-            mc.textRenderer.drawWithShadow(matrices, setting.getName(), x - mc.textRenderer.getWidth(setting.getName()) - 1, y + height/2f - mc.textRenderer.fontHeight/2f, -1);
-            fill(matrices, x, y, (int) (x + ((setting.getValue() - min) / (max - min)) * width), y + height, -1);
-            mc.textRenderer.drawWithShadow(matrices, "" + round(setting.getValue(), 1), x + width + 1, y + height/2f - mc.textRenderer.fontHeight/2f, -1);
+        public void render(DrawContext context, int mouseX, int mouseY) {
+            context.drawTextWithShadow(mc.textRenderer, setting.getName(), x - mc.textRenderer.getWidth(setting.getName()) - 1, (int) (y + height/2f - mc.textRenderer.fontHeight/2f), -1);
+            context.fill(x, y, (int) (x + ((setting.getValue() - min) / (max - min)) * width), y + height, -1);
+            context.drawTextWithShadow(mc.textRenderer, "" + round(setting.getValue(), 1), x + width + 1, (int) (y + height/2f - mc.textRenderer.fontHeight/2f), -1);
         }
 
         @Override
@@ -102,15 +102,15 @@ public class ViewmodelScreen extends Screen {
         }
 
         @Override
-        public void render(MatrixStack matrices, int mouseX, int mouseY) {
-            mc.textRenderer.drawWithShadow(matrices, setting.getName(), x - mc.textRenderer.getWidth(setting.getName()) - 1, y + height / 2f - mc.textRenderer.fontHeight / 2f, -1);
-            fill(matrices, x, y, x + (height << 1), y + height, -0x78EFEFF0);
+        public void render(DrawContext context, int mouseX, int mouseY) {
+            context.drawTextWithShadow(mc.textRenderer, setting.getName(), x - mc.textRenderer.getWidth(setting.getName()) - 1, (int) (y + height / 2f - mc.textRenderer.fontHeight / 2f), -1);
+            context.fill(x, y, x + (height << 1), y + height, -0x78EFEFF0);
             if (setting.getValue()) {
-                fill(matrices, x + 1, y + 1, x + height - 1, y + height - 1, -1);
+                context.fill(x + 1, y + 1, x + height - 1, y + height - 1, -1);
             } else {
-                fill(matrices, x + height + 1, y + 1, x + (height << 1) - 1, y + height - 1, -1);
+                context.fill(x + height + 1, y + 1, x + (height << 1) - 1, y + height - 1, -1);
             }
-            mc.textRenderer.drawWithShadow(matrices, setting.getValue().toString(), x + (height << 1) + 1, y + height/2f - mc.textRenderer.fontHeight/2f, -1);
+            context.drawTextWithShadow(mc.textRenderer, setting.getValue().toString(), x + (height << 1) + 1, (int) (y + height/2f - mc.textRenderer.fontHeight/2f), -1);
         }
 
         @Override
@@ -125,17 +125,17 @@ public class ViewmodelScreen extends Screen {
 
         void mouseClicked(double mx, double my);
 
-        void render(MatrixStack matrices, int mouseX, int mouseY);
+        void render(DrawContext context, int mouseX, int mouseY);
 
         boolean isWithin(double mouseX, double mouseY);
 
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(matrices);
+    public void render(DrawContext context, int mouseX, int mouseY, float partialTicks) {
+        renderBackground(context);
         for (ViewmodelGuiObj obj : objs) {
-            obj.render(matrices, mouseX, mouseY);
+            obj.render(context, mouseX, mouseY);
         }
     }
 

@@ -1,27 +1,40 @@
 package me.ethius.viewmodel.settings;
 
-public class FloatSetting extends Setting<Float> {
+public class FloatSetting implements Setting<Float> {
 
-    public float min, max;
+    private Float value;
+    private String name;
+    private float min;
+    private float max;
 
     public FloatSetting(String name, float defaultValue, float min, float max) {
-        super(name, defaultValue);
+        this.name = name;
+        this.value = defaultValue;
         this.min = min;
         this.max = max;
     }
-    
+
     @Override
     public String getName() {
         return name;
     }
 
-    public void setValue(float value) {
+    @Override
+    public void setValue(Float value) {
         this.value = value;
     }
-    
+
     @Override
     public Float getValue() {
         return value;
     }
 
+    // Additional methods specific to FloatSetting if needed
+    public float getMin() {
+        return min;
+    }
+
+    public float getMax() {
+        return max;
+    }
 }

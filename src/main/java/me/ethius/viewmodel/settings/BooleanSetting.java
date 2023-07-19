@@ -1,17 +1,22 @@
 package me.ethius.viewmodel.settings;
 
-public class BooleanSetting extends Setting<Boolean> {
+public class BooleanSetting implements Setting<Boolean> {
+
+    private Boolean value;
+    private String name;
 
     public BooleanSetting(String name, boolean defaultValue) {
-        super(name, defaultValue);
+        this.name = name;
+        this.value = defaultValue;
     }
-    
+
     @Override
     public String getName() {
         return name;
     }
 
-    public void setValue(boolean value) {
+    @Override
+    public void setValue(Boolean value) {
         this.value = value;
     }
 
