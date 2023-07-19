@@ -1,10 +1,10 @@
-package me.ethius.viewmodel;
+package net.cyberflame.viewmodel;
 
-import me.ethius.viewmodel.config.LoadConfig;
-import me.ethius.viewmodel.config.SaveConfig;
-import me.ethius.viewmodel.settings.BooleanSetting;
-import me.ethius.viewmodel.settings.FloatSetting;
-import me.ethius.viewmodel.settings.Setting;
+import net.cyberflame.viewmodel.config.LoadConfig;
+import net.cyberflame.viewmodel.config.SaveConfig;
+import net.cyberflame.viewmodel.settings.BooleanSetting;
+import net.cyberflame.viewmodel.settings.FloatSetting;
+import net.cyberflame.viewmodel.settings.Setting;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

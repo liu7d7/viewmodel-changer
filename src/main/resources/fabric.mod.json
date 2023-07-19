@@ -5,6 +5,7 @@
   "name": "Viewmodel",
   "description": "A mod to change the scaling/position of first person items",
   "authors": [
+    "CyberFlame",
     "Ethius"
   ],
   "contact": {
@@ -15,7 +16,7 @@
   "environment": "client",
   "entrypoints": {
     "main": [
-      "me.ethius.viewmodel.Viewmodel"
+      "net.cyberflame.viewmodel.Viewmodel"
     ]
   },
   "mixins": [

@@ -1,6 +1,6 @@
-package me.ethius.viewmodel.mixin;
+package net.cyberflame.viewmodel.mixin;
 
-import me.ethius.viewmodel.Viewmodel;
+import net.cyberflame.viewmodel.Viewmodel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;

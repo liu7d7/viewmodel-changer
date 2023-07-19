@@ -1,4 +1,4 @@
-package me.ethius.viewmodel.util;
+package net.cyberflame.viewmodel.util;
 
 public class Stopwatch {
 

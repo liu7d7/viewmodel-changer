@@ -1,10 +1,10 @@
-package me.ethius.viewmodel.config;
+package net.cyberflame.viewmodel.config;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.ethius.viewmodel.Viewmodel;
-import me.ethius.viewmodel.settings.Setting;
+import net.cyberflame.viewmodel.Viewmodel;
+import net.cyberflame.viewmodel.settings.Setting;
 
 import java.io.IOException;
 import java.io.InputStream;

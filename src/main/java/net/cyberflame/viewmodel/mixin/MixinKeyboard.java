@@ -1,6 +1,6 @@
-package me.ethius.viewmodel.mixin;
+package net.cyberflame.viewmodel.mixin;
 
-import me.ethius.viewmodel.gui.ViewmodelScreen;
+import net.cyberflame.viewmodel.gui.ViewmodelScreen;
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;

@@ -1,9 +1,9 @@
-package me.ethius.viewmodel.gui;
+package net.cyberflame.viewmodel.gui;
 
-import me.ethius.viewmodel.Viewmodel;
-import me.ethius.viewmodel.settings.BooleanSetting;
-import me.ethius.viewmodel.settings.FloatSetting;
-import me.ethius.viewmodel.settings.Setting;
+import net.cyberflame.viewmodel.Viewmodel;
+import net.cyberflame.viewmodel.settings.BooleanSetting;
+import net.cyberflame.viewmodel.settings.FloatSetting;
+import net.cyberflame.viewmodel.settings.Setting;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;

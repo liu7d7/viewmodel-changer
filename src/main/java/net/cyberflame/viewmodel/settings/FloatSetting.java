@@ -1,4 +1,4 @@
-package me.ethius.viewmodel.settings;
+package net.cyberflame.viewmodel.settings;
 
 public class FloatSetting implements Setting<Float> {
 

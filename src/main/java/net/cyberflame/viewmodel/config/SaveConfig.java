@@ -1,11 +1,11 @@
-package me.ethius.viewmodel.config;
+package net.cyberflame.viewmodel.config;
 
 import com.google.gson.*;
-import me.ethius.viewmodel.Viewmodel;
-import me.ethius.viewmodel.settings.BooleanSetting;
-import me.ethius.viewmodel.settings.FloatSetting;
-import me.ethius.viewmodel.settings.Setting;
-import me.ethius.viewmodel.util.Stopwatch;
+import net.cyberflame.viewmodel.Viewmodel;
+import net.cyberflame.viewmodel.settings.BooleanSetting;
+import net.cyberflame.viewmodel.settings.FloatSetting;
+import net.cyberflame.viewmodel.settings.Setting;
+import net.cyberflame.viewmodel.util.Stopwatch;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
