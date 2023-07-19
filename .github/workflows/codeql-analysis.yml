@@ -43,7 +43,7 @@ jobs:
       with:
         distribution: 'semeru' # See 'Supported distributions' for available options
         java-version: '20'
-        cache: 'maven'
+        cache: 'gradle'
         check-latest: true
 
     # Initializes the CodeQL tools for scanning.
