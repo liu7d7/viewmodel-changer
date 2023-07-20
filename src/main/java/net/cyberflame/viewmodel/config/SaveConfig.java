@@ -28,7 +28,7 @@ public class SaveConfig {
             saveTimer = new Stopwatch();
             timedSave();
         }
-        catch (IOException e) {
+        catch (final IOException e) {
             e.printStackTrace();
         }
     }

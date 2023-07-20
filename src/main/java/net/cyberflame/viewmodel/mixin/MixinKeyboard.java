@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 class MixinKeyboard {
 
     @Inject(at = @At("HEAD"), method = "onKey(JIIII)V", cancellable = true)
-    private static void onOnKey(long windowHandle, int keyCode, int scanCode, int action, int modifiers, CallbackInfo ci) {
+    private static void onOnKey(final long windowHandle, final int keyCode, final int scanCode, final int action, final int modifiers, final CallbackInfo ci) {
         if (null != MinecraftClient.getInstance().world && GLFW.GLFW_PRESS == action && GLFW.GLFW_KEY_BACKSLASH == keyCode) {
             MinecraftClient.getInstance().setScreen(new ViewmodelScreen());
         }

@@ -12,9 +12,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.Runtime.getRuntime;
+
 public class Viewmodel implements ModInitializer {
 
-    private final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
     public static final BooleanSetting SCALE = new BooleanSetting("Scale", false);
     public static final FloatSetting SCALE_X = new FloatSetting("Scale X", 1, 0, 3);
     public static final FloatSetting SCALE_Y = new FloatSetting("Scale Y", 1, 0, 3);
@@ -34,11 +36,11 @@ public class Viewmodel implements ModInitializer {
     private static LoadConfig lconfig;
 
     @Override
-    public void onInitialize() {
+    public final void onInitialize() {
         LOGGER.info("Loading Viewmodel!");
         lconfig = new LoadConfig();
         sconfig = new SaveConfig();
-        Runtime.getRuntime().addShutdownHook(new Thread(SaveConfig::saveAllSettings));
+        getRuntime().addShutdownHook(new Thread(SaveConfig::saveAllSettings));
     }
 
 }

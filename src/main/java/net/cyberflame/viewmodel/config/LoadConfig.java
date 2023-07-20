@@ -24,7 +24,7 @@ public class LoadConfig {
     public LoadConfig() {
         try {
             loadAllSettings();
-        } catch (IOException ignored) {
+        } catch (final IOException ignored) {
 
         }
     }
@@ -47,7 +47,7 @@ public class LoadConfig {
             }
 
             inputStream.close();
-        } catch (IOException ignored) {
+        } catch (final IOException ignored) {
 
         } finally {
             if (null != inputStreamReader)

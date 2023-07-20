@@ -85,6 +85,7 @@ public class ViewmodelScreen extends Screen {
         private final int height;
 
         Switch(BooleanSetting setting, int x, int y, int height) {
+            super();
             this.setting = setting;
             this.x = x;
             this.y = y;
