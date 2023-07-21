@@ -16,9 +16,15 @@ public class BooleanSetting implements Setting<Boolean> {
     }
 
     @Override
-    public void setValue(Boolean value) {
-        this.value = value;
-    }
+    public void setValue(JsonElement value) {
+        if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isBoolean()) {
+            this.value = value.getAsBoolean();
+        } else {
+            // Handle invalid JSON value for a boolean setting - perhaps one of these?
+            
+            // this.value = defaultValue; // Set default value
+            // throw new IllegalArgumentException("Invalid value for boolean setting.");
+        }
 
     @Override
     public Boolean getValue() {
