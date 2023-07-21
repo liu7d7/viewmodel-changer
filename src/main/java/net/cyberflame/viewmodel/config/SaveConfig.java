@@ -1,9 +1,10 @@
 package net.cyberflame.viewmodel.config;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.cyberflame.viewmodel.Viewmodel;
-import net.cyberflame.viewmodel.settings.BooleanSetting;
-import net.cyberflame.viewmodel.settings.FloatSetting;
 import net.cyberflame.viewmodel.settings.Setting;
 import net.cyberflame.viewmodel.util.Stopwatch;
 
@@ -50,12 +51,9 @@ public class SaveConfig {
             JsonObject viewmodelObj = new JsonObject();
 
             for (Setting value : Viewmodel.SETTINGS) {
-                if (value instanceof BooleanSetting) {
-                    viewmodelObj.add(value.getName(), new JsonPrimitive((Boolean) value.getValue()));
-                } else if (value instanceof FloatSetting) {
-                    viewmodelObj.add(value.getName(), new JsonPrimitive((Float) value.getValue()));
-                }
+                viewmodelObj.add(value.getName(), value.toJson());
             }
+
 
             String jsonString = gson.toJson(JsonParser.parseString(viewmodelObj.toString()));
             fileOutputStreamWriter.write(jsonString);

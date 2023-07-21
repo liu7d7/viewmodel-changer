@@ -1,5 +1,8 @@
 package net.cyberflame.viewmodel.settings;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+
 public class FloatSetting implements Setting<Float> {
 
     private Float value;
@@ -22,6 +25,18 @@ public class FloatSetting implements Setting<Float> {
     @Override
     public void setValue(Float value) {
         this.value = value;
+    }
+
+    @Override
+    public void setValue(JsonElement value) {
+        if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isNumber()) {
+            this.value = value.getAsFloat();
+        }
+    }
+
+    @Override
+    public JsonElement toJson() {
+        return new JsonPrimitive(value);
     }
 
     @Override
