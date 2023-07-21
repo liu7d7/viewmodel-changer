@@ -25,6 +25,7 @@ public class BooleanSetting implements Setting<Boolean> {
             // this.value = defaultValue; // Set default value
             // throw new IllegalArgumentException("Invalid value for boolean setting.");
         }
+    }
 
     @Override
     public Boolean getValue() {
