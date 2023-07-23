@@ -24,7 +24,7 @@ The mod is currently available for the following versions of the game (all of th
 * [`1.19.2`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.3)
 * [`1.19.3`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.4)
 * [`1.19.4`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.5)
-* [`1.20`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.6) **‼️ VERSION MAY NOT WORK - UNTESTED**
+* [`1.20`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.6) **‼️ VERSION MAY NOT WORK - UNTESTED AND CONTAINS BREAKING CHANGES**
 * [`1.20.1`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.8) **‼️ RELEASE BROKEN - FIX IN PROGRESS** 
 
 ### Downloading the mod
