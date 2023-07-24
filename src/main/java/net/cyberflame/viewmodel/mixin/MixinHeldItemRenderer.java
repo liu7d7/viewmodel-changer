@@ -15,9 +15,11 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -46,7 +48,7 @@ public abstract class MixinHeldItemRenderer {
     @Inject(at = @At(value = "HEAD"), method = "renderFirstPersonItem", cancellable = true)
     private void renderFirstPersonItem1(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo info) {
         if (!player.isUsingSpyglass()) {
-            boolean bl = hand == Hand.MAIN_HAND;
+            boolean bl = Hand.MAIN_HAND == hand;
             Arm arm = bl ? player.getMainArm() : player.getMainArm().getOpposite();
             matrices.push();
             if (Viewmodel.POS.getValue()) {
@@ -78,22 +80,22 @@ public abstract class MixinHeldItemRenderer {
                 float y;
                 if (item.isOf(Items.CROSSBOW)) {
                     bl4 = CrossbowItem.isCharged(item);
-                    boolean bl3 = arm == Arm.RIGHT;
+                    boolean bl3 = Arm.RIGHT == arm;
                     int i = bl3 ? 1 : -1;
-                    if (player.isUsingItem() && player.getItemUseTimeLeft() > 0 && player.getActiveHand() == hand) {
+                    if (player.isUsingItem() && 0 < player.getItemUseTimeLeft() && player.getActiveHand() == hand) {
                         this.applyEquipOffset(matrices, arm, equipProgress);
                         matrices.translate((float)i * -0.4785682F, -0.0943870022892952D, 0.05731530860066414D);
                         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-11.935F));
                         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)i * 65.3F));
                         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)i * -9.785F));
-                        assert this.client.player != null;
+                        assert null != this.client.player;
                         v = (float)item.getMaxUseTime() - ((float)this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
                         w = v / (float)CrossbowItem.getPullTime(item);
-                        if (w > 1.0F) {
+                        if (1.0F < w) {
                             w = 1.0F;
                         }
 
-                        if (w > 0.1F) {
+                        if (0.1F < w) {
                             x = MathHelper.sin((v - 0.1F) * 1.3F);
                             y = w - 0.1F;
                             float k = x * y;
@@ -110,7 +112,7 @@ public abstract class MixinHeldItemRenderer {
                         matrices.translate((float)i * v, w, x);
                         this.applyEquipOffset(matrices, arm, equipProgress);
                         this.applySwingOffset(matrices, arm, swingProgress);
-                        if (bl4 && swingProgress < 0.001F && bl) {
+                        if (bl4 && 0.001F > swingProgress && bl) {
                             matrices.translate((float)i * -0.641864F, 0.0D, 0.0D);
                             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)i * 10.0F));
                         }
@@ -118,10 +120,10 @@ public abstract class MixinHeldItemRenderer {
 
                     this.renderItem(player, item, bl3 ? ModelTransformationMode.FIRST_PERSON_RIGHT_HAND : ModelTransformationMode.FIRST_PERSON_LEFT_HAND, !bl3, matrices, vertexConsumers, light);
                 } else {
-                    bl4 = arm == Arm.RIGHT;
+                    bl4 = Arm.RIGHT == arm;
                     int o;
                     float u;
-                    if (player.isUsingItem() && player.getItemUseTimeLeft() > 0 && player.getActiveHand() == hand) {
+                    if (player.isUsingItem() && 0 < player.getItemUseTimeLeft() && player.getActiveHand() == hand) {
                         o = bl4 ? 1 : -1;
                         switch (item.getUseAction()) {
                             case NONE, BLOCK -> this.applyEquipOffset(matrices, arm, equipProgress);
@@ -133,21 +135,10 @@ public abstract class MixinHeldItemRenderer {
                                 this.applyEquipOffset(matrices, arm, equipProgress);
                                 matrices.translate((float) o * -0.2785682F, 0.18344387412071228D, 0.15731531381607056D);
                                 matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-13.935F));
-                                matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) o * 35.3F));
-                                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) o * -9.785F));
-                                assert this.client.player != null;
-                                u = (float) item.getMaxUseTime() - ((float) this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
+                                u = getU(tickDelta, item, matrices, o, this.client);
                                 v = u / 20.0F;
                                 v = (v * v + v * 2.0F) / 3.0F;
-                                if (v > 1.0F) {
-                                    v = 1.0F;
-                                }
-                                if (v > 0.1F) {
-                                    w = MathHelper.sin((u - 0.1F) * 1.3F);
-                                    x = v - 0.1F;
-                                    y = w * x;
-                                    matrices.translate(y * 0.0F, y * 0.004F, y * 0.0F);
-                                }
+                                v = getV(matrices, v, u);
                                 matrices.translate(v * 0.0F, v * 0.0F, v * 0.04F);
                                 matrices.scale(1.0F, 1.0F, 1.0F + v * 0.2F);
                                 matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees((float) o * 45.0F));
@@ -156,20 +147,9 @@ public abstract class MixinHeldItemRenderer {
                                 this.applyEquipOffset(matrices, arm, equipProgress);
                                 matrices.translate((float) o * -0.5F, 0.699999988079071D, 0.10000000149011612D);
                                 matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-55.0F));
-                                matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) o * 35.3F));
-                                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) o * -9.785F));
-                                assert this.client.player != null;
-                                u = (float) item.getMaxUseTime() - ((float) this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
+                                u = getU(tickDelta, item, matrices, o, this.client);
                                 v = u / 10.0F;
-                                if (v > 1.0F) {
-                                    v = 1.0F;
-                                }
-                                if (v > 0.1F) {
-                                    w = MathHelper.sin((u - 0.1F) * 1.3F);
-                                    x = v - 0.1F;
-                                    y = w * x;
-                                    matrices.translate(y * 0.0F, y * 0.004F, y * 0.0F);
-                                }
+                                v = getV(matrices, v, u);
                                 matrices.translate(0.0D, 0.0D, v * 0.2F);
                                 matrices.scale(1.0F, 1.0F, 1.0F + v * 0.2F);
                                 matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees((float) o * 45.0F));
@@ -203,6 +183,34 @@ public abstract class MixinHeldItemRenderer {
         }
         info.cancel();
 
+    }
+
+    @Unique
+    private static float getV(MatrixStack matrices, float v, float u) {
+        float v1 = v;
+        float w;
+        float x;
+        float y;
+        if (1.0F < v1) {
+            v1 = 1.0F;
+        }
+        if (0.1F < v1) {
+            w = MathHelper.sin((u - 0.1F) * 1.3F);
+            x = v1 - 0.1F;
+            y = w * x;
+            matrices.translate(y * 0.0F, y * 0.004F, y * 0.0F);
+        }
+        return v1;
+    }
+
+    @Unique
+    private static float getU(float tickDelta, @NotNull ItemStack item, @NotNull MatrixStack matrices, float o, @NotNull MinecraftClient client) {
+        float u;
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(o * 35.3F));
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(o * -9.785F));
+        assert null != client.player;
+        u = (float) item.getMaxUseTime() - ((float) client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
+        return u;
     }
 
 }
