@@ -4,17 +4,17 @@ public class Stopwatch {
 
     private long time;
 
-    public Stopwatch()
-    {
+    public Stopwatch() {
+        super();
         time = -1;
     }
 
-    public boolean passed(double ms)
+    public final boolean passed(double ms)
     {
         return System.currentTimeMillis() - this.time >= ms;
     }
 
-    public void reset()
+    public final void reset()
     {
         this.time = System.currentTimeMillis();
     }

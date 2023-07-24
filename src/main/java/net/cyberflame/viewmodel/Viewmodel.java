@@ -8,6 +8,7 @@ import net.cyberflame.viewmodel.settings.Setting;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NonNls;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +32,8 @@ public class Viewmodel implements ModInitializer {
     public static final FloatSetting ROTATION_Z = new FloatSetting("Rotation Z", 0, -180, 180);
     public static final BooleanSetting CHANGE_SWING = new BooleanSetting("Change Swing", false);
     public static final List<Setting<?>> SETTINGS = Arrays.asList(SCALE, SCALE_X, SCALE_Y, SCALE_Z, POS, POS_X, POS_Y, POS_Z, ROTATION, ROTATION_X, ROTATION_Y, ROTATION_Z, CHANGE_SWING);
+    @NonNls
+    public static final String VIEWMODEL_JSON = "Viewmodel.json";
 
     private static SaveConfig sconfig;
     private static LoadConfig lconfig;

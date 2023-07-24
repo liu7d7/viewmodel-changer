@@ -2,6 +2,10 @@ package net.cyberflame.viewmodel.settings;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
+import net.cyberflame.viewmodel.gui.Switch;
+import net.cyberflame.viewmodel.gui.ViewmodelGuiObj;
+
+import java.util.Collection;
 
 public class BooleanSetting implements Setting<Boolean> {
 
@@ -44,5 +48,11 @@ public class BooleanSetting implements Setting<Boolean> {
     public Boolean getValue() {
         return value;
     }
+
+    @Override
+    public void createUIElement(Collection<ViewmodelGuiObj> objs, int settingCount) {
+        objs.add(new Switch(this, 80, 50 + (settingCount << 4), 12));
+    }
+
 
 }

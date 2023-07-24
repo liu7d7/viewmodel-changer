@@ -11,6 +11,7 @@ import net.cyberflame.viewmodel.util.Stopwatch;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -34,7 +35,7 @@ public class SaveConfig {
         }
     }
 
-    public static String folderName = "Viewmodel/";
+    static final String folderName = "Viewmodel/";
 
     private static void saveConfig() throws IOException {
         if (!Files.exists(Paths.get(folderName))) {
@@ -47,7 +48,7 @@ public class SaveConfig {
             makeFile(null, "Viewmodel");
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            OutputStreamWriter fileOutputStreamWriter = new OutputStreamWriter(new FileOutputStream(folderName + "Viewmodel.json"), StandardCharsets.UTF_8);
+            OutputStreamWriter fileOutputStreamWriter = new OutputStreamWriter(new FileOutputStream(folderName + Viewmodel.VIEWMODEL_JSON), StandardCharsets.UTF_8);
             JsonObject viewmodelObj = new JsonObject();
 
             for (Setting value : Viewmodel.SETTINGS) {
@@ -67,23 +68,25 @@ public class SaveConfig {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private static void makeFile(String location, String name) throws IOException {
-        if (location != null) {
-            if (Files.exists(Paths.get(folderName + location + name + ".json"))) {
+        if (null != location) {
+            Path path = Paths.get(folderName + location + name + ".json");
+            if (Files.exists(path)) {
                 File file = new File(folderName + location + name + ".json");
 
                 if (file.delete()) {
-                    Files.createFile(Paths.get(folderName + location + name + ".json"));
+                    Files.createFile(path);
                 }
             } else {
-                Files.createFile(Paths.get(folderName + location + name + ".json"));
+                Files.createFile(path);
             }
         } else {
-            if (Files.exists(Paths.get(folderName + name + ".json"))) {
+            Path path = Paths.get(folderName + name + ".json");
+            if (Files.exists(path)) {
                 File file = new File(folderName + name + ".json");
 
                 file.delete();
             }
-            Files.createFile(Paths.get(folderName + name + ".json"));
+            Files.createFile(path);
         }
 
     }

@@ -2,6 +2,10 @@ package net.cyberflame.viewmodel.settings;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
+import net.cyberflame.viewmodel.gui.Slider;
+import net.cyberflame.viewmodel.gui.ViewmodelGuiObj;
+
+import java.util.Collection;
 
 public class FloatSetting implements Setting<Float> {
 
@@ -42,6 +46,12 @@ public class FloatSetting implements Setting<Float> {
     @Override
     public Float getValue() {
         return value;
+    }
+
+    @Override
+    public void createUIElement(Collection<ViewmodelGuiObj> objs, int settingCount) {
+        // Create UI element for FloatSetting
+        objs.add(new Slider(this, 80, 50 + (settingCount << 4), 80, 12));
     }
 
     // Additional methods specific to FloatSetting if needed

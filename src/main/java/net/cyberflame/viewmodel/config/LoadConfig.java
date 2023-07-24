@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -19,9 +20,8 @@ import java.nio.file.Paths;
 @SuppressWarnings("unchecked")
 public class LoadConfig {
 
-    private static String folderName = SaveConfig.folderName;
-
     public LoadConfig() {
+        super();
         try {
             loadAllSettings();
         } catch (final IOException ignored) {
@@ -32,11 +32,13 @@ public class LoadConfig {
     private static void loadAllSettings() throws IOException {
         InputStreamReader inputStreamReader = null;
         try {
-            if (!Files.exists(Paths.get(folderName + "Viewmodel.json"))) {
+            String folderName = SaveConfig.folderName;
+            Path path = Paths.get(folderName + Viewmodel.VIEWMODEL_JSON);
+            if (!Files.exists(path)) {
                 return;
             }
 
-            InputStream inputStream = Files.newInputStream(Paths.get(folderName + "Viewmodel.json"));
+            InputStream inputStream = Files.newInputStream(path);
             inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             JsonObject viewmodelObj = JsonParser.parseReader(inputStreamReader).getAsJsonObject();
 
