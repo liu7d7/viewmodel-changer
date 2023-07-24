@@ -48,13 +48,13 @@ public class ViewmodelScreen extends Screen {
     }
 
     @Override
-    public final boolean mouseScrolled(double mouseX, double mouseY, double multiplier) {
+    public final boolean mouseScrolled(double mouseX, double mouseY, double amount) {
         for (ViewmodelGuiObj obj : this.objs) {
             if (obj.isWithin(mouseX, mouseY)) {
-                obj.mouseScrolled(mouseX, mouseY, (float) multiplier);
+                obj.mouseScrolled(mouseX, mouseY, (float) amount);
             }
         }
-        return super.mouseScrolled(mouseX, mouseY, multiplier);
+        return super.mouseScrolled(mouseX, mouseY, amount);
     }
 
 }

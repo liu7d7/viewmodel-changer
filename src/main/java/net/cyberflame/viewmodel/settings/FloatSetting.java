@@ -4,62 +4,66 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import net.cyberflame.viewmodel.gui.Slider;
 import net.cyberflame.viewmodel.gui.ViewmodelGuiObj;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
 public class FloatSetting implements Setting<Float> {
 
     private Float value;
-    private String name;
-    private float min;
-    private float max;
+    private final String name;
+    private final float min;
+    private final float max;
 
-    public FloatSetting(String name, float defaultValue, float min, float max) {
+    public FloatSetting(String name, float defaultValue, float minVal, float maxVal) {
+        super();
         this.name = name;
         this.value = defaultValue;
-        this.min = min;
-        this.max = max;
+        this.min = minVal;
+        this.max = maxVal;
     }
 
     @Override
-    public String getName() {
-        return name;
+    public final String getName() {
+        return this.name;
     }
 
     @Override
-    public void setValue(Float value) {
-        this.value = value;
+    public final void setValue(Float val) {
+        this.value = val;
     }
 
     @Override
-    public void setValue(JsonElement value) {
-        if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isNumber()) {
-            this.value = value.getAsFloat();
+    public final void setValue(@NotNull JsonElement element) {
+        if (element.isJsonPrimitive() && element.getAsJsonPrimitive().isNumber()) {
+            this.value = element.getAsFloat();
         }
     }
 
+    @Contract(value = " -> new", pure = true)
     @Override
-    public JsonElement toJson() {
-        return new JsonPrimitive(value);
+    public final @NotNull JsonElement toJson() {
+        return new JsonPrimitive(this.value);
     }
 
     @Override
-    public Float getValue() {
-        return value;
+    public final Float getValue() {
+        return this.value;
     }
 
     @Override
-    public void createUIElement(Collection<ViewmodelGuiObj> objs, int settingCount) {
+    public final void createUIElement(@NotNull Collection<? super ViewmodelGuiObj> objs, int settingCount) {
         // Create UI element for FloatSetting
         objs.add(new Slider(this, 80, 50 + (settingCount << 4), 80, 12));
     }
 
     // Additional methods specific to FloatSetting if needed
-    public float getMin() {
-        return min;
+    public final float getMin() {
+        return this.min;
     }
 
-    public float getMax() {
-        return max;
+    public final float getMax() {
+        return this.max;
     }
 }

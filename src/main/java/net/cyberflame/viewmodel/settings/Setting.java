@@ -9,10 +9,10 @@ public interface Setting<T> {
 
     String getName();
     T getValue();
-    void setValue(T value);
-    void setValue(JsonElement value);
+    void setValue(T val);
+    void setValue(JsonElement element);
     JsonElement toJson();
 
-    void createUIElement(Collection<ViewmodelGuiObj> objs, int settingCount);
+    void createUIElement(Collection<? super ViewmodelGuiObj> objs, int settingCount);
 
 }

@@ -10,47 +10,48 @@ import java.util.Collection;
 public class BooleanSetting implements Setting<Boolean> {
 
     private Boolean value;
-    private String name;
+    private final String name;
 
-    public BooleanSetting(String name, boolean defaultValue) {
-        this.name = name;
+    public BooleanSetting(String settingName, boolean defaultValue) {
+        super();
+        this.name = settingName;
         this.value = defaultValue;
     }
 
     @Override
-    public JsonElement toJson() {
-        return new JsonPrimitive(value);
+    public final JsonElement toJson() {
+        return new JsonPrimitive(this.value);
     }
 
     @Override
-    public String getName() {
-        return name;
+    public final String getName() {
+        return this.name;
     }
 
     @Override
-    public void setValue(JsonElement value) {
-        if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isBoolean()) {
-            this.value = value.getAsBoolean();
+    public final void setValue(JsonElement element) {
+        if (element.isJsonPrimitive() && element.getAsJsonPrimitive().isBoolean()) {
+            this.value = element.getAsBoolean();
         }
 
-        // Potentially add an else to handle invalid JSON value for a boolean setting - perhaps one of these?
-        // this.value = defaultValue; // Set default value
-        // throw new IllegalArgumentException("Invalid value for boolean setting.");
+        // Potentially add an else to handle invalid JSON element for a boolean setting - perhaps one of these?
+        // this.element = defaultValue; // Set default element
+        // throw new IllegalArgumentException("Invalid element for boolean setting.");
 
     }
 
     @Override
-    public void setValue(Boolean value) {
+    public final void setValue(Boolean value) {
         this.value = value;
     }
 
     @Override
-    public Boolean getValue() {
-        return value;
+    public final Boolean getValue() {
+        return this.value;
     }
 
     @Override
-    public void createUIElement(Collection<ViewmodelGuiObj> objs, int settingCount) {
+    public final void createUIElement(Collection<? super ViewmodelGuiObj> objs, int settingCount) {
         objs.add(new Switch(this, 80, 50 + (settingCount << 4), 12));
     }
 

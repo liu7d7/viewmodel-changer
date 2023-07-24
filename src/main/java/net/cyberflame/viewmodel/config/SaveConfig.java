@@ -23,14 +23,14 @@ public class SaveConfig {
     private static Stopwatch saveTimer;
 
     public SaveConfig() {
+        super();
         try {
             gson = new GsonBuilder().setPrettyPrinting().create();
             saveConfig();
             saveAllSettings();
             saveTimer = new Stopwatch();
             timedSave();
-        }
-        catch (final IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
