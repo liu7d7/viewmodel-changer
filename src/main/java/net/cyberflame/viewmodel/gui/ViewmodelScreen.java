@@ -14,7 +14,7 @@ import java.util.List;
 public class ViewmodelScreen extends Screen {
 
     static final MinecraftClient mc = MinecraftClient.getInstance();
-    private final Collection<ViewmodelGuiObj> objs = new ArrayList<>();
+    private final Collection<ViewmodelGuiObj> objs = new ArrayList<>(3);
 
     public ViewmodelScreen() {
         super(Text.of("Viewmodel"));
@@ -32,7 +32,7 @@ public class ViewmodelScreen extends Screen {
     @Override
     public final void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);
-        for (ViewmodelGuiObj obj : objs) {
+        for (ViewmodelGuiObj obj : this.objs) {
             obj.render(context, mouseX, mouseY);
         }
     }
