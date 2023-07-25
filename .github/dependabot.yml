@@ -31,5 +31,5 @@ registries:
     type: maven-repository
     url: https://maven.pkg.github.com/cyberflamego/viewmodel-changer
     username: cyberflamego
-    password: ${{secrets.GITHUB_TOKEN}}
+    password: ${{secrets.GH_PACKAGE_READER}}
     replaces-base: true
