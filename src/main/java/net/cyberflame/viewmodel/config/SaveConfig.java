@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.cyberflame.viewmodel.Viewmodel;
-import net.cyberflame.viewmodel.settings.Setting;
 import net.cyberflame.viewmodel.util.Stopwatch;
 
 import java.io.*;
@@ -25,7 +24,7 @@ public class SaveConfig {
     public SaveConfig() {
         super();
         try {
-            gson = new GsonBuilder().setPrettyPrinting().create();
+            this.gson = new GsonBuilder().setPrettyPrinting().create();
             saveConfig();
             saveAllSettings();
             saveTimer = new Stopwatch();
@@ -52,9 +51,7 @@ public class SaveConfig {
             OutputStreamWriter fileOutStreamWriter = new OutputStreamWriter(new FileOutputStream(folderName + Viewmodel.VIEWMODEL_JSON), StandardCharsets.UTF_8);
             JsonObject viewmodelObj = new JsonObject();
 
-            for (Setting value : Viewmodel.getSettings()) {
-                viewmodelObj.add(value.getName(), value.toJson());
-            }
+            Viewmodel.getSettings().forEach(value -> viewmodelObj.add(value.getName(), value.toJson()));
 
 
             String jsonString = gson.toJson(JsonParser.parseString(viewmodelObj.toString()));

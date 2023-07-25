@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 /**
  * @author ChiquitaV2
  */
-@SuppressWarnings("unchecked")
 public class LoadConfig {
 
     public LoadConfig() {
