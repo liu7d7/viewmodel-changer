@@ -13,13 +13,6 @@ updates:
       - "CyberFlameGO"
     reviewers:
       - "CyberFlameGO"
-    registries:
-      github-maven:
-        type: maven-repository
-        url: https://maven.pkg.github.com/cyberflamego/viewmodel-changer
-        username: cyberflamego
-        password: ${{secrets.GITHUB_TOKEN}}
-        replaces-base: true
       
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -30,3 +23,11 @@ updates:
       - "CyberFlameGO"
     reviewers:
       - "CyberFlameGO"
+
+registries:
+  github-maven:
+    type: maven-repository
+    url: https://maven.pkg.github.com/cyberflamego/viewmodel-changer
+    username: cyberflamego
+    password: ${{secrets.GITHUB_TOKEN}}
+    replaces-base: true
