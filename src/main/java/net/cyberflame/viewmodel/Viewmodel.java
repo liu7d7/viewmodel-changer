@@ -1,6 +1,5 @@
 package net.cyberflame.viewmodel;
 
-import io.sentry.Sentry;
 import net.cyberflame.viewmodel.config.LoadConfig;
 import net.cyberflame.viewmodel.config.SaveConfig;
 import net.cyberflame.viewmodel.settings.Setting;
@@ -39,9 +38,6 @@ public class Viewmodel implements ModInitializer {
 
     @Override
     public final void onInitialize() {
-        Sentry.init(options -> {
-            options.setDsn("https://4cd48caa041b4f96a8187e4347b62b3a@o317122.ingest.sentry.io/4505559171465216");
-        });
         LOGGER.info("Loading Viewmodel!");
         lconfig = new LoadConfig();
         sconfig = new SaveConfig();

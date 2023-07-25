@@ -25,7 +25,7 @@ The mod is currently available for the following versions of the game (all of th
 * [`1.19.3`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.4)
 * [`1.19.4`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.5)
 * [`1.20`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.6) **‼️ VERSION MAY NOT WORK - UNTESTED AND CONTAINS BREAKING CHANGES**
-* [`1.20.1`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.8) **‼️ RELEASE BROKEN - FIX IN PROGRESS** 
+* [`1.20.1`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.9)
 
 ### Downloading the mod
 To download the mod, go to the [Releases page](https://github.com/CyberFlameGO/viewmodel-changer/releases) and download the `viewmodel-*.jar` (where `*` is a version number) file under the Assets section, for the version of the game you want to use the mod on (ideally the latest release for your game version). You can also download the mod from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/viewmodel-changer) if you prefer that.
@@ -60,14 +60,14 @@ If nothing here fits your needs, feel free to contact me via email at [cyberflam
 #### Compiling (building) the mod
 To build the mod, you need to have Java 17 or later installed. 
 
-1. Remove the following line from the `sourcesJar` task in `build.gradle`:
+<!--1. Remove the following line from the `sourcesJar` task in `build.gradle`:
     ```groovy
     dependsOn generateSentryDebugMetaPropertiesjava
     ```
 
 2. Remove the `sentry` configuration from the `build.gradle` file.
 
-3. Run the following command in the root directory of the project to build the mod:
+3. -->Run the following command in the root directory of the project to build the mod:
 
 Linux/Mac (may work on Windows too; though I'm unsure):
 ```shell
