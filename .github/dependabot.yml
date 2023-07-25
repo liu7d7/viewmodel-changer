@@ -33,3 +33,4 @@ registries:
     username: cyberflamego
     password: ${{secrets.GH_PACKAGE_READER}}
     replaces-base: true
+    
