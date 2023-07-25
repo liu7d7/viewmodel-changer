@@ -9,21 +9,24 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-      
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      # Check for updates to GitHub Actions every weekday
-      interval: "daily"
-
-  - registries:
+    assignees:
+      - "CyberFlameGO"
+    reviewers:
+      - "CyberFlameGO"
+    registries:
       github-maven:
         type: maven-repository
         url: https://maven.pkg.github.com/cyberflamego/viewmodel-changer
         username: cyberflamego
         password: ${{secrets.GITHUB_TOKEN}}
         replaces-base: true
-  - assignees:
+      
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every weekday
+      interval: "daily"
+    assignees:
       - "CyberFlameGO"
-  - reviewers:
+    reviewers:
       - "CyberFlameGO"
