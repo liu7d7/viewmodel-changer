@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static java.util.stream.IntStream.range;
+
 public class ViewmodelScreen extends Screen {
 
     static final MinecraftClient mc = MinecraftClient.getInstance();
@@ -23,23 +25,21 @@ public class ViewmodelScreen extends Screen {
     @Override
     public final void init() {
         List<Setting<?>> settingsList = Viewmodel.getSettings();
-        for (int i = 0; i < settingsList.size(); i++) {
+        range(0, settingsList.size()).forEachOrdered(i -> {
             Setting<?> setting = settingsList.get(i);
             setting.createUIElement(this.objs, i);
-        }
+        });
     }
 
     @Override
     public final void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);
-        for (ViewmodelGuiObj obj : this.objs) {
-            obj.render(context, mouseX, mouseY);
-        }
+        this.objs.forEach(obj -> obj.render(context, mouseX, mouseY));
     }
 
     @Override
     public final boolean mouseClicked(double mouseX, double mouseY, int button) {
-        for (ViewmodelGuiObj obj : objs) {
+        for (ViewmodelGuiObj obj : this.objs) {
             if (obj.isWithin(mouseX, mouseY)) {
                 obj.mouseClicked(mouseX, mouseY);
             }

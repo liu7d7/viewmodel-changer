@@ -38,8 +38,9 @@ public class SaveConfig {
     static final String folderName = "Viewmodel/";
 
     private static void saveConfig() throws IOException {
-        if (!Files.exists(Paths.get(folderName))) {
-            Files.createDirectories(Paths.get(folderName));
+        Path dir = Paths.get(folderName);
+        if (!Files.exists(dir)) {
+            Files.createDirectories(dir);
         }
     }
 
@@ -48,7 +49,7 @@ public class SaveConfig {
             makeFile(null, "Viewmodel");
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            OutputStreamWriter fileOutputStreamWriter = new OutputStreamWriter(new FileOutputStream(folderName + Viewmodel.VIEWMODEL_JSON), StandardCharsets.UTF_8);
+            OutputStreamWriter fileOutStreamWriter = new OutputStreamWriter(new FileOutputStream(folderName + Viewmodel.VIEWMODEL_JSON), StandardCharsets.UTF_8);
             JsonObject viewmodelObj = new JsonObject();
 
             for (Setting value : Viewmodel.getSettings()) {
@@ -57,8 +58,8 @@ public class SaveConfig {
 
 
             String jsonString = gson.toJson(JsonParser.parseString(viewmodelObj.toString()));
-            fileOutputStreamWriter.write(jsonString);
-            fileOutputStreamWriter.close();
+            fileOutStreamWriter.write(jsonString);
+            fileOutStreamWriter.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

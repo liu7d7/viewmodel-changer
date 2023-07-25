@@ -16,6 +16,7 @@ public class FloatSetting implements Setting<Float> {
     private final float min;
     private final float max;
 
+    @Contract(pure = true)
     FloatSetting(String name, float defaultValue, float minVal, float maxVal) {
         super();
         this.name = name;
@@ -24,11 +25,13 @@ public class FloatSetting implements Setting<Float> {
         this.max = maxVal;
     }
 
+    @Contract(pure = true)
     @Override
     public final String getName() {
         return this.name;
     }
 
+    @Contract(mutates = "this")
     @Override
     public final void setValue(Float val) {
         this.value = val;
@@ -47,6 +50,7 @@ public class FloatSetting implements Setting<Float> {
         return new JsonPrimitive(this.value);
     }
 
+    @Contract(pure = true)
     @Override
     public final Float getValue() {
         return this.value;
@@ -59,10 +63,12 @@ public class FloatSetting implements Setting<Float> {
     }
 
     // Additional methods specific to FloatSetting if needed
+    @Contract(pure = true)
     public final float getMin() {
         return this.min;
     }
 
+    @Contract(pure = true)
     public final float getMax() {
         return this.max;
     }

@@ -1,5 +1,7 @@
 package net.cyberflame.viewmodel.settings;
 
+import org.jetbrains.annotations.Contract;
+
 public enum SettingType {
     SCALE("Scale", false),
     SCALE_X("Scale X", 1, 0, 3),
@@ -18,20 +20,24 @@ public enum SettingType {
     private final String name;
     private final Setting<?> setting;
 
+    @Contract(pure = true)
     SettingType(String name, boolean defaultValue) {
         this.name = name;
         this.setting = new BooleanSetting(name, defaultValue);
     }
 
+    @Contract(pure = true)
     SettingType(String name, float defaultValue, float minValue, float maxValue) {
         this.name = name;
         this.setting = new FloatSetting(name, defaultValue, minValue, maxValue);
     }
 
+    @Contract(pure = true)
     public String getName() {
         return this.name;
     }
 
+    @Contract(pure = true)
     public Setting<?> getSetting() {
         return this.setting;
     }
