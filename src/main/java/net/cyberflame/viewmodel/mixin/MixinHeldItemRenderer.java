@@ -46,7 +46,7 @@ public abstract class MixinHeldItemRenderer {
 
     @Shadow protected abstract void applyEatOrDrinkTransformation(MatrixStack matrices, float tickDelta, Arm arm, ItemStack stack);
 
-    @Inject(at = @At(value = "HEAD"), method = "renderFirstPersonItem", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "renderFirstPersonItem", cancellable = true)
     private void renderFirstPersonItem1(@NotNull AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo info) {
         if (!player.isUsingSpyglass()) {
             boolean bl = Hand.MAIN_HAND == hand;
