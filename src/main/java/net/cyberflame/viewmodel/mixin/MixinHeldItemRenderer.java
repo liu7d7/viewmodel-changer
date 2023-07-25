@@ -1,6 +1,5 @@
 package net.cyberflame.viewmodel.mixin;
 
-import net.cyberflame.viewmodel.Viewmodel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -24,6 +23,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.cyberflame.viewmodel.settings.SettingType.*;
+
 @Mixin(HeldItemRenderer.class)
 public abstract class MixinHeldItemRenderer {
 
@@ -46,21 +47,21 @@ public abstract class MixinHeldItemRenderer {
     @Shadow protected abstract void applyEatOrDrinkTransformation(MatrixStack matrices, float tickDelta, Arm arm, ItemStack stack);
 
     @Inject(at = @At(value = "HEAD"), method = "renderFirstPersonItem", cancellable = true)
-    private void renderFirstPersonItem1(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo info) {
+    private void renderFirstPersonItem1(@NotNull AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo info) {
         if (!player.isUsingSpyglass()) {
             boolean bl = Hand.MAIN_HAND == hand;
             Arm arm = bl ? player.getMainArm() : player.getMainArm().getOpposite();
             matrices.push();
-            if (Viewmodel.POS.getValue()) {
-                matrices.translate(Viewmodel.POS_X.getValue() * 0.1, Viewmodel.POS_Y.getValue() * 0.1, Viewmodel.POS_Z.getValue() * 0.1);
+            if (POS.getBooleanValue()) {
+                matrices.translate(POS_X.getFloatValue() * 0.1, POS_Y.getFloatValue() * 0.1, POS_Z.getFloatValue() * 0.1);
             }
-            if (Viewmodel.ROTATION.getValue()) {
-                matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(Viewmodel.ROTATION_Y.getValue()));
-                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(Viewmodel.ROTATION_X.getValue()));
-                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(Viewmodel.ROTATION_Z.getValue()));
+            if (ROTATION.getBooleanValue()) {
+                matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(ROTATION_Y.getFloatValue()));
+                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(ROTATION_X.getFloatValue()));
+                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(ROTATION_Z.getFloatValue()));
             }
-            if (Viewmodel.SCALE.getValue()) {
-                matrices.scale(1 - (1 - Viewmodel.SCALE_X.getValue()) * 0.1F, 1 - (1 - Viewmodel.SCALE_Y.getValue()) * 0.1F, 1 - (1 - Viewmodel.SCALE_Z.getValue()) * 0.1F);
+            if (SCALE.getBooleanValue()) {
+                matrices.scale(1 - (1 - SCALE_X.getFloatValue()) * 0.1F, 1 - (1 - SCALE_Y.getFloatValue()) * 0.1F, 1 - (1 - SCALE_Z.getFloatValue()) * 0.1F);
             }
             if (item.isEmpty()) {
                 if (bl && !player.isInvisible()) {
@@ -160,7 +161,7 @@ public abstract class MixinHeldItemRenderer {
                     } else if (player.isUsingRiptide()) {
                         this.applyEquipOffset(matrices, arm, equipProgress);
                         o = bl4 ? 1 : -1;
-                        if (!Viewmodel.CHANGE_SWING.getValue()) {
+                        if (!CHANGE_SWING.getBooleanValue()) {
                             matrices.translate((float) o * -0.4F, 0.800000011920929D, 0.30000001192092896D);
                         }
                         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)o * 65.0F));

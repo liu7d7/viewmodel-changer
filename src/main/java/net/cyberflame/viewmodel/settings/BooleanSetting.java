@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import net.cyberflame.viewmodel.gui.Switch;
 import net.cyberflame.viewmodel.gui.ViewmodelGuiObj;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -12,7 +13,7 @@ public class BooleanSetting implements Setting<Boolean> {
     private Boolean value;
     private final String name;
 
-    public BooleanSetting(String settingName, boolean defaultValue) {
+    BooleanSetting(String settingName, boolean defaultValue) {
         super();
         this.name = settingName;
         this.value = defaultValue;
@@ -51,7 +52,7 @@ public class BooleanSetting implements Setting<Boolean> {
     }
 
     @Override
-    public final void createUIElement(Collection<? super ViewmodelGuiObj> objs, int settingCount) {
+    public final void createUIElement(@NotNull Collection<? super ViewmodelGuiObj> objs, int settingCount) {
         objs.add(new Switch(this, 80, 50 + (settingCount << 4), 12));
     }
 

@@ -22,7 +22,7 @@ public class ViewmodelScreen extends Screen {
     
     @Override
     public final void init() {
-        List<Setting<?>> settingsList = Viewmodel.SETTINGS;
+        List<Setting<?>> settingsList = Viewmodel.getSettings();
         for (int i = 0; i < settingsList.size(); i++) {
             Setting<?> setting = settingsList.get(i);
             setting.createUIElement(this.objs, i);

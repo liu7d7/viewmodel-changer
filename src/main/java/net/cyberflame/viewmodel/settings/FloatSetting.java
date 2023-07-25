@@ -16,7 +16,7 @@ public class FloatSetting implements Setting<Float> {
     private final float min;
     private final float max;
 
-    public FloatSetting(String name, float defaultValue, float minVal, float maxVal) {
+    FloatSetting(String name, float defaultValue, float minVal, float maxVal) {
         super();
         this.name = name;
         this.value = defaultValue;

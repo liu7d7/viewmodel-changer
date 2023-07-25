@@ -51,7 +51,7 @@ public class SaveConfig {
             OutputStreamWriter fileOutputStreamWriter = new OutputStreamWriter(new FileOutputStream(folderName + Viewmodel.VIEWMODEL_JSON), StandardCharsets.UTF_8);
             JsonObject viewmodelObj = new JsonObject();
 
-            for (Setting value : Viewmodel.SETTINGS) {
+            for (Setting value : Viewmodel.getSettings()) {
                 viewmodelObj.add(value.getName(), value.toJson());
             }
 

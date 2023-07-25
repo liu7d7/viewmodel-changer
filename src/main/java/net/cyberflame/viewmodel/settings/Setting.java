@@ -12,7 +12,6 @@ public interface Setting<T> {
     void setValue(T val);
     void setValue(JsonElement element);
     JsonElement toJson();
-
     void createUIElement(Collection<? super ViewmodelGuiObj> objs, int settingCount);
 
 }

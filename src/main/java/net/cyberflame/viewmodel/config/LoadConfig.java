@@ -42,7 +42,7 @@ public class LoadConfig {
             inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             JsonObject viewmodelObj = JsonParser.parseReader(inputStreamReader).getAsJsonObject();
 
-            for (Setting value : Viewmodel.SETTINGS) {
+            for (Setting value : Viewmodel.getSettings()) {
                 JsonElement valueElement = viewmodelObj.get(value.getName());
                 if (null == valueElement) continue;
                 value.setValue(valueElement); // Polymorphism handles the specific type internally
