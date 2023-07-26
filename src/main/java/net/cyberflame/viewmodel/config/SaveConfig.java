@@ -58,7 +58,7 @@ public class SaveConfig {
             fileOutStreamWriter.write(jsonString);
             fileOutStreamWriter.close();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException("Could not find Viewmodel.json", e);
         } catch (IOException e) {
             e.printStackTrace();
         }

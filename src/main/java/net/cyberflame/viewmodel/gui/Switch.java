@@ -2,6 +2,7 @@ package net.cyberflame.viewmodel.gui;
 
 import net.cyberflame.viewmodel.settings.BooleanSetting;
 import net.minecraft.client.gui.DrawContext;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public record Switch(BooleanSetting setting, int x, int y, int height) implements ViewmodelGuiObj {
@@ -31,6 +32,7 @@ public record Switch(BooleanSetting setting, int x, int y, int height) implement
         context.drawTextWithShadow(ViewmodelScreen.mc.textRenderer, Boolean.toString(settingValue), this.x + (this.height << 1) + 1, (int) (this.y + this.height / 2.0f - ViewmodelScreen.mc.textRenderer.fontHeight / 2.0f), -1);
     }
 
+    @Contract(pure = true)
     @Override
     public boolean isWithin(double mouseX, double mouseY) {
         return mouseX > this.x && mouseY > this.y && mouseX < this.x + (this.height << 1) && mouseY < this.y + this.height;
