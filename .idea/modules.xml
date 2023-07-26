@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.cyberflame.viewmodel-changer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/net.cyberflame.viewmodel-changer.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.cyberflame.viewmodel-changer.test.iml" filepath="$PROJECT_DIR$/.idea/modules/net.cyberflame.viewmodel-changer.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/viewmodel-changer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/viewmodel-changer.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/viewmodel-changer.test.iml" filepath="$PROJECT_DIR$/.idea/modules/viewmodel-changer.test.iml" />
     </modules>

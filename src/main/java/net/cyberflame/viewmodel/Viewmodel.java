@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,14 +34,16 @@ public class Viewmodel implements ModInitializer {
     @NonNls
     public static final String VIEWMODEL_JSON = "Viewmodel.json";
 
-    private static SaveConfig sconfig;
-    private static LoadConfig lconfig;
 
     @Override
     public final void onInitialize() {
         LOGGER.info("Loading Viewmodel!");
-        lconfig = new LoadConfig();
-        sconfig = new SaveConfig();
+        try {
+            new LoadConfig();
+            new SaveConfig();
+        } catch (IOException e) {
+            LOGGER.error("Failed to load settings!", e);
+        }
         getRuntime().addShutdownHook(new Thread(SaveConfig::saveAllSettings));
     }
 

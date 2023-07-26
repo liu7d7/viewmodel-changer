@@ -26,7 +26,7 @@ public class ViewmodelScreen extends Screen {
     public final void init() {
         List<Setting<?>> settingsList = Viewmodel.getSettings();
         range(0, settingsList.size()).forEachOrdered(i -> {
-            Setting<?> setting = settingsList.get(i);
+            var setting = settingsList.get(i);
             setting.createUIElement(this.objs, i);
         });
     }

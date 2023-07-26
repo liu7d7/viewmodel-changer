@@ -18,25 +18,19 @@ import java.nio.file.Paths;
  */
 public class SaveConfig {
 
-    private Gson gson;
     private static Stopwatch saveTimer;
 
-    public SaveConfig() {
+    public SaveConfig() throws IOException {
         super();
-        try {
-            this.gson = new GsonBuilder().setPrettyPrinting().create();
-            saveConfig();
-            saveAllSettings();
-            saveTimer = new Stopwatch();
-            timedSave();
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
+        this.saveConfig();
+        saveAllSettings();
+        saveTimer = new Stopwatch();
+        timedSave();
     }
 
     static final String folderName = "Viewmodel/";
 
-    private static void saveConfig() throws IOException {
+    private void saveConfig() throws IOException {
         Path dir = Paths.get(folderName);
         if (!Files.exists(dir)) {
             Files.createDirectories(dir);

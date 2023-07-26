@@ -19,16 +19,12 @@ import java.nio.file.Paths;
  */
 public class LoadConfig {
 
-    public LoadConfig() {
+    public LoadConfig() throws IOException {
         super();
-        try {
-            loadAllSettings();
-        } catch (final IOException ignored) {
-
-        }
+        this.loadAllSettings();
     }
 
-    private static void loadAllSettings() throws IOException {
+    private void loadAllSettings() throws IOException {
         InputStreamReader inputStreamReader = null;
         try {
             String folderName = SaveConfig.folderName;
