@@ -1,12 +1,15 @@
 package net.cyberflame.viewmodel.util;
 
+import org.jetbrains.annotations.Contract;
+
 public class Stopwatch {
 
     private long time;
 
+    @Contract(pure = true)
     public Stopwatch() {
         super();
-        time = -1;
+        this.time = -1;
     }
 
     public final boolean passed(double ms)
@@ -19,21 +22,23 @@ public class Stopwatch {
         this.time = System.currentTimeMillis();
     }
 
-    public void resetTimeSkipTo(long p_MS)
+    public final void resetTimeSkipTo(long p_MS)
     {
         this.time = System.currentTimeMillis() + p_MS;
     }
 
+    @Contract(pure = true)
     @Deprecated
-    public long getTime() {
-        return time;
+    public final long getTime() {
+        return this.time;
     }
 
-    public long getTimeReal() {
+    public final long getTimeReal() {
         return System.currentTimeMillis() - this.time;
     }
 
-    public void setTime(long time)
+    @Contract(mutates = "this")
+    public final void setTime(long time)
     {
         this.time = time;
     }
