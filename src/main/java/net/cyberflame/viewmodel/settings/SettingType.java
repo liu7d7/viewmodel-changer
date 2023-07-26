@@ -3,10 +3,7 @@ package net.cyberflame.viewmodel.settings;
 import org.jetbrains.annotations.Contract;
 
 public enum SettingType {
-    SCALE("Scale", false),
-    SCALE_X("Scale X", 1, 0, 3),
-    SCALE_Y("Scale Y", 1, 0, 3),
-    SCALE_Z("Scale Z", 1, 0, 3),
+    CHANGE_SWING("Change Swing", false),
     POS("Position", false),
     POS_X("Position X", 0, -2, 2),
     POS_Y("Position Y", 0, -2, 2),
@@ -15,7 +12,10 @@ public enum SettingType {
     ROTATION_X("Rotation X", 0, -180, 180),
     ROTATION_Y("Rotation Y", 0, -180, 180),
     ROTATION_Z("Rotation Z", 0, -180, 180),
-    CHANGE_SWING("Change Swing", false);
+    SCALE("Scale", false),
+    SCALE_X("Scale X", 1, 0, 3),
+    SCALE_Y("Scale Y", 1, 0, 3),
+    SCALE_Z("Scale Z", 1, 0, 3);
 
     private final String name;
     private final Setting<?> setting;

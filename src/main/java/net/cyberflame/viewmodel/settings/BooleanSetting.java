@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
-public class BooleanSetting implements Setting<Boolean> {
+public non-sealed class BooleanSetting implements Setting<Boolean> {
 
     private Boolean value;
     private final String name;

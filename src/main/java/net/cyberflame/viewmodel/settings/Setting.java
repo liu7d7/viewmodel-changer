@@ -5,7 +5,7 @@ import net.cyberflame.viewmodel.gui.ViewmodelGuiObj;
 
 import java.util.Collection;
 
-public interface Setting<T> {
+public sealed interface Setting<T> permits BooleanSetting, FloatSetting {
 
     String getName();
     T getValue();

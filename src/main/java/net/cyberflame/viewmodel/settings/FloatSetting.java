@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
-public class FloatSetting implements Setting<Float> {
+public non-sealed class FloatSetting implements Setting<Float> {
 
     private Float value;
     private final String name;
