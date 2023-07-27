@@ -25,7 +25,7 @@ The mod is currently available for the following versions of the game (all of th
 * [`1.19.3`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.4)
 * [`1.19.4`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.5)
 * [`1.20`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.6) **‼️ VERSION MAY NOT WORK - UNTESTED AND CONTAINS BREAKING CHANGES**
-* [`1.20.1`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.9)
+* [`1.20.1`](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.9.2) *Untested - last tested release [here](https://github.com/CyberFlameGO/viewmodel-changer/releases/tag/v1.9.2)*
 
 ### Downloading the mod
 To download the mod, go to the [Releases page](https://github.com/CyberFlameGO/viewmodel-changer/releases) and download the `viewmodel-*.jar` (where `*` is a version number) file under the Assets section, for the version of the game you want to use the mod on (ideally the latest release for your game version). You can also download the mod from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/viewmodel-changer) if you prefer that.
