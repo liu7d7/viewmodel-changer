@@ -15,13 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.*;
 
 import static net.cyberflame.viewmodel.settings.SettingType.*;
 
@@ -46,8 +40,12 @@ public abstract class MixinHeldItemRenderer {
 
     @Shadow protected abstract void applyEatOrDrinkTransformation(MatrixStack matrices, float tickDelta, Arm arm, ItemStack stack);
 
-    @Inject(at = @At("HEAD"), method = "renderFirstPersonItem", cancellable = true)
-    private void renderFirstPersonItem1(@NotNull AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo info) {
+    /**
+     * @author CyberFlame
+     * @reason The inject would always cancel and therefore can cause incompatibilities with other mods.
+     */
+    @Overwrite
+    private void renderFirstPersonItem(@NotNull AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         if (!player.isUsingSpyglass()) {
             boolean bl = Hand.MAIN_HAND == hand;
             Arm arm = bl ? player.getMainArm() : player.getMainArm().getOpposite();
@@ -182,7 +180,6 @@ public abstract class MixinHeldItemRenderer {
 
             matrices.pop();
         }
-        info.cancel();
 
     }
 

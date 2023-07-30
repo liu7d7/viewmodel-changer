@@ -3,6 +3,7 @@ package net.cyberflame.viewmodel.gui;
 import net.cyberflame.viewmodel.settings.FloatSetting;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
@@ -60,6 +61,7 @@ public class Slider implements ViewmodelGuiObj {
     }
 
 
+    @Contract(pure = true)
     @Override
     public final boolean isWithin(double mouseX, double mouseY) {
         return mouseX > this.x && mouseY > this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;

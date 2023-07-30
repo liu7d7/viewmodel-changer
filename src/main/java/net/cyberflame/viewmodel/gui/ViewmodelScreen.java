@@ -21,7 +21,7 @@ public class ViewmodelScreen extends Screen {
     public ViewmodelScreen() {
         super(Text.of("Viewmodel"));
     }
-    
+
     @Override
     public final void init() {
         List<Setting<?>> settingsList = Viewmodel.getSettings();

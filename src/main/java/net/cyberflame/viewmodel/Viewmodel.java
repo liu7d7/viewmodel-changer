@@ -31,6 +31,7 @@ public class Viewmodel implements ModInitializer {
         // Return a copy of the SETTINGS list to prevent direct modification
         return new ArrayList<>(SETTINGS);
     }
+
     @NonNls
     public static final String VIEWMODEL_JSON = "Viewmodel.json";
 
