@@ -184,6 +184,7 @@ public abstract class MixinHeldItemRenderer {
     }
 
     @Unique
+    @SuppressWarnings("strictfp")
     private static strictfp float getV(MatrixStack matrices, float v, float u) {
         float v1 = v;
         float w;
