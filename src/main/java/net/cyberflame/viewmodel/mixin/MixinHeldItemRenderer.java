@@ -17,28 +17,39 @@ import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.*;
 
+import java.util.Objects;
+
 import static net.cyberflame.viewmodel.settings.SettingType.*;
 
 @Mixin(HeldItemRenderer.class)
 public abstract class MixinHeldItemRenderer {
 
-    @Shadow protected abstract void renderArmHoldingItem(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, float equipProgress, float swingProgress, Arm arm);
+    @Shadow
+    protected abstract void renderArmHoldingItem(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, float equipProgress, float swingProgress, Arm arm);
 
-    @Shadow private ItemStack offHand;
+    @Shadow
+    private ItemStack offHand;
 
-    @Shadow protected abstract void renderMapInBothHands(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, float pitch, float equipProgress, float swingProgress);
+    @Shadow
+    protected abstract void renderMapInBothHands(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, float pitch, float equipProgress, float swingProgress);
 
-    @Shadow protected abstract void renderMapInOneHand(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, float equipProgress, Arm arm, float swingProgress, ItemStack stack);
+    @Shadow
+    protected abstract void renderMapInOneHand(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, float equipProgress, Arm arm, float swingProgress, ItemStack stack);
 
     @Shadow protected abstract void applyEquipOffset(MatrixStack matrices, Arm arm, float equipProgress);
 
-    @Shadow @Final private MinecraftClient client;
+    @Shadow
+    @Final
+    private MinecraftClient client;
 
-    @Shadow protected abstract void applySwingOffset(MatrixStack matrices, Arm arm, float swingProgress);
+    @Shadow
+    protected abstract void applySwingOffset(MatrixStack matrices, Arm arm, float swingProgress);
 
-    @Shadow public abstract void renderItem(LivingEntity entity, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
+    @Shadow
+    public abstract void renderItem(LivingEntity entity, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
 
-    @Shadow protected abstract void applyEatOrDrinkTransformation(MatrixStack matrices, float tickDelta, Arm arm, ItemStack stack);
+    @Shadow
+    protected abstract void applyEatOrDrinkTransformation(MatrixStack matrices, float tickDelta, Arm arm, ItemStack stack);
 
     /**
      * @author CyberFlame
@@ -50,15 +61,15 @@ public abstract class MixinHeldItemRenderer {
             boolean bl = Hand.MAIN_HAND == hand;
             Arm arm = bl ? player.getMainArm() : player.getMainArm().getOpposite();
             matrices.push();
-            if (POS.getBooleanValue()) {
+            if (POS.isTrue()) {
                 matrices.translate(POS_X.getFloatValue() * 0.1, POS_Y.getFloatValue() * 0.1, POS_Z.getFloatValue() * 0.1);
             }
-            if (ROTATION.getBooleanValue()) {
+            if (ROTATION.isTrue()) {
                 matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(ROTATION_Y.getFloatValue()));
                 matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(ROTATION_X.getFloatValue()));
                 matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(ROTATION_Z.getFloatValue()));
             }
-            if (SCALE.getBooleanValue()) {
+            if (SCALE.isTrue()) {
                 matrices.scale(1 - (1 - SCALE_X.getFloatValue()) * 0.1F, 1 - (1 - SCALE_Y.getFloatValue()) * 0.1F, 1 - (1 - SCALE_Z.getFloatValue()) * 0.1F);
             }
             if (item.isEmpty()) {
@@ -85,11 +96,11 @@ public abstract class MixinHeldItemRenderer {
                         this.applyEquipOffset(matrices, arm, equipProgress);
                         matrices.translate((float)i * -0.4785682F, -0.0943870022892952D, 0.05731530860066414D);
                         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-11.935F));
-                        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)i * 65.3F));
-                        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)i * -9.785F));
+                        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(i * 65.3F));
+                        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(i * -9.785F));
                         assert null != this.client.player;
-                        v = (float)item.getMaxUseTime() - ((float)this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
-                        w = v / (float)CrossbowItem.getPullTime(item);
+                        v = item.getMaxUseTime() - (Objects.requireNonNull(this.client.player).getItemUseTimeLeft() - tickDelta + 1.0F);
+                        w = v / CrossbowItem.getPullTime(item);
                         if (1.0F < w) {
                             w = 1.0F;
                         }
@@ -103,17 +114,17 @@ public abstract class MixinHeldItemRenderer {
 
                         matrices.translate(w * 0.0F, w * 0.0F, w * 0.04F);
                         matrices.scale(1.0F, 1.0F, 1.0F + w * 0.2F);
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees((float)i * 45.0F));
+                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(i * 45.0F));
                     } else {
                         v = -0.4F * MathHelper.sin(MathHelper.sqrt(swingProgress) * 3.1415927F);
                         w = 0.2F * MathHelper.sin(MathHelper.sqrt(swingProgress) * 6.2831855F);
                         x = -0.2F * MathHelper.sin(swingProgress * 3.1415927F);
-                        matrices.translate((float)i * v, w, x);
+                        matrices.translate(i * v, w, x);
                         this.applyEquipOffset(matrices, arm, equipProgress);
                         this.applySwingOffset(matrices, arm, swingProgress);
                         if (bl4 && 0.001F > swingProgress && bl) {
-                            matrices.translate((float)i * -0.641864F, 0.0D, 0.0D);
-                            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)i * 10.0F));
+                            matrices.translate((float) i * -0.641864F, 0.0D, 0.0D);
+                            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(i * 10.0F));
                         }
                     }
 
@@ -159,7 +170,7 @@ public abstract class MixinHeldItemRenderer {
                     } else if (player.isUsingRiptide()) {
                         this.applyEquipOffset(matrices, arm, equipProgress);
                         o = bl4 ? 1 : -1;
-                        if (!CHANGE_SWING.getBooleanValue()) {
+                        if (!CHANGE_SWING.isTrue()) {
                             matrices.translate((float) o * -0.4F, 0.800000011920929D, 0.30000001192092896D);
                         }
                         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)o * 65.0F));
@@ -169,7 +180,7 @@ public abstract class MixinHeldItemRenderer {
                         u = 0.2F * MathHelper.sin(MathHelper.sqrt(swingProgress) * 6.2831855F);
                         v = -0.2F * MathHelper.sin(swingProgress * 3.1415927F);
                         int ad = bl4 ? 1 : -1;
-                        matrices.translate((float)ad * aa, u, v);
+                        matrices.translate(ad * aa, u, v);
                         this.applyEquipOffset(matrices, arm, equipProgress);
                         this.applySwingOffset(matrices, arm, swingProgress);
                     }

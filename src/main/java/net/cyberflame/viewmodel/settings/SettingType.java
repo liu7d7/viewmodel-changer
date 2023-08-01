@@ -42,7 +42,7 @@ public enum SettingType {
         return this.setting;
     }
 
-    public boolean getBooleanValue() {
+    public boolean isTrue() {
         if (this.setting instanceof BooleanSetting) {
             return ((BooleanSetting) this.setting).getValue();
         } else {
