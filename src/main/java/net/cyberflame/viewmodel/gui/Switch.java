@@ -20,7 +20,7 @@ public record Switch(BooleanSetting setting, int x, int y, int height) implement
         boolean settingValue = booleanSetting.getValue();
 
         context.drawTextWithShadow(ViewmodelScreen.mc.textRenderer, settingName, this.x - ViewmodelScreen.mc.textRenderer.getWidth(settingName) - 1, (int) (this.y + this.height / 2.0f - ViewmodelScreen.mc.textRenderer.fontHeight / 2.0f), -1);
-        context.fill(this.x, this.y, this.x + (this.height << 1), this.y + this.height,     -0x78EFEFF0);
+        context.fill(this.x, this.y, this.x + (this.height << 1), this.y + this.height, -0x78EFEFF0);
 
         // Use the cached settingValue variable instead of calling this.setting.getValue() multiple times
         if (settingValue) {

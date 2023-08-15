@@ -4,7 +4,8 @@ import net.minecraft.client.gui.DrawContext;
 
 public interface ViewmodelGuiObj {
 
-    default void mouseScrolled(double mx, double my, float inc) {}
+    default void mouseScrolled(double mx, double my, float inc) {
+    }
 
     void mouseClicked(double mx, double my);
 
