@@ -38,13 +38,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
-    - uses: actions/setup-java@v3
-      with:
-        distribution: 'semeru' # See 'Supported distributions' for available options
-        java-version: '20'
-        cache: 'gradle'
-        check-latest: true
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -61,8 +54,6 @@ jobs:
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
-      env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
