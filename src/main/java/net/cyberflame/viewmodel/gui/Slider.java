@@ -33,7 +33,8 @@ public class Slider implements ViewmodelGuiObj {
     }
 
     @Override
-    public final void mouseScrolled(double mx, double my, float inc) {
+    public final void mouseScrolled(double mx, double my, float incx, float incy) {
+        float inc = (incx > incy) ? incx : incy
         this.setting.setValue(MathHelper.clamp(this.setting.getValue() + inc * 0.1F, this.min, this.max));
     }
 

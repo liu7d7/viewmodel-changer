@@ -33,7 +33,7 @@ public class ViewmodelScreen extends Screen {
 
     @Override
     public final void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
+        this.renderBackground(context, mouseX, mouseY, delta);
         this.objs.forEach(obj -> obj.render(context, mouseX, mouseY));
     }
 
@@ -48,13 +48,13 @@ public class ViewmodelScreen extends Screen {
     }
 
     @Override
-    public final boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+    public final boolean mouseScrolled(double mouseX, double mouseY, double amountX, double amountY) {
         for (ViewmodelGuiObj obj : this.objs) {
             if (obj.isWithin(mouseX, mouseY)) {
-                obj.mouseScrolled(mouseX, mouseY, (float) amount);
+                obj.mouseScrolled(mouseX, mouseY, (float) amountX, (float) amountY);
             }
         }
-        return super.mouseScrolled(mouseX, mouseY, amount);
+        return super.mouseScrolled(mouseX, mouseY, amountX, amountY);
     }
 
 }
