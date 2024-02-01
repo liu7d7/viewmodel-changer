@@ -18,7 +18,7 @@ jobs:
           distribution: 'semeru'
           cache: 'gradle'
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@1ff5a18cc396177ebd27c4250f7132e72af93462
+        uses: gradle/wrapper-validation-action@83cf5fdbbf627c8da6fec32f28db58967a3136ac
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
