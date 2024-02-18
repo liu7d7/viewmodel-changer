@@ -1,0 +1,31 @@
+name: Submit dependencies
+on:
+  push:
+    branches:
+      - master # run the action on your projects default branch
+
+jobs:
+  build:
+    name: Dependencies
+    runs-on: ubuntu-latest
+    permissions: # The Dependency Submission API requires write permission
+      contents: write
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+      
+      - name: 'Set up Java 21'
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'liberica' # See 'Supported distributions' for available options
+          java-version: '21'
+          cache: 'gradle'
+
+      - name: 'Root Gradle Dependency Submission'
+        uses: mikepenz/gradle-dependency-submission@v0.9.2
+        with:
+          use-gradlew: true
+          gradle-build-module: |-
+            :
+          gradle-build-configuration: |-
+            compileClasspath

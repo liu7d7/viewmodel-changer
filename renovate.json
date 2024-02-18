@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "forkProcessing": "enabled",
+  "ignoreDeps": ["com.mojang:minecraft", "net.fabricmc.fabric-api:fabric-api", "net.fabricmc:fabric-loader", "net.fabricmc:yarn"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ],
+  "assigneesFromCodeOwners": true
+}
